@@ -20,11 +20,12 @@ func CreateOrder(c echo.Context) error {
 	if err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, message)
 	}
-	errMsg := authen.ValidateToken(token, req.UserId)
+	// get userId from token
+	userId, errMsg := authen.ValidateToken(token)
 	if len(errMsg) > 0 {
 		return echo.NewHTTPError(http.StatusUnauthorized, errMsg)
 	}
-	statement, bindValue := prepareSQLInsertOrder(*req)
+	statement, bindValue := prepareSQLInsertOrder(req.ProductId, userId)
 	err = util.ExecuteStatement(statement, bindValue)
 	if err != nil {
 		return echo.NewHTTPError(http.StatusInternalServerError, err.Error())
@@ -33,12 +34,18 @@ func CreateOrder(c echo.Context) error {
 }
 
 func GetOrder(c echo.Context) error {
+	token := c.Request().Header.Get("Authorization")
+	token = strings.TrimPrefix(token, "Bearer ")
 	orderId := c.QueryParam("orderId")
-	userId := c.QueryParam("userId")
 	status := c.QueryParam("status")
 	page, _ := strconv.Atoi(c.QueryParam("page"))
 	size, _ := strconv.Atoi(c.QueryParam("size"))
 	offset := size * (page - 1)
+	// get userId from token
+	userId, errMsg := authen.ValidateToken(token)
+	if len(errMsg) > 0 {
+		return echo.NewHTTPError(http.StatusUnauthorized, errMsg)
+	}
 	orders, err := getOrderById(orderId, userId, status, offset, size)
 	if err != nil {
 		return echo.NewHTTPError(http.StatusInternalServerError, err.Error())

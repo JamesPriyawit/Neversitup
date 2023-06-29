@@ -8,10 +8,10 @@ import (
 	"neversitup/constant"
 )
 
-func prepareSQLInsertOrder(req Order) (result string, bindValue []interface{}) {
+func prepareSQLInsertOrder(proId, userId string) (result string, bindValue []interface{}) {
 	var buffer bytes.Buffer
 	buffer.WriteString("INSERT INTO orders (user_id,product_id,status,created_date) VALUES ($1, $2, $3, now()) ")
-	bindValue = append(bindValue, req.UserId, req.ProductId, constant.Inprogress)
+	bindValue = append(bindValue, userId, proId, constant.Inprogress)
 	result = buffer.String()
 	return result, bindValue
 }

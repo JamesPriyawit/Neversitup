@@ -51,7 +51,7 @@ func generateJWT(userID string) string {
 	return signedToken
 }
 
-func ValidateToken(tokenString string, userID string) (message string) {
+func ValidateToken(tokenString string) (id, message string) {
 	token, err := jwt.ParseWithClaims(tokenString, &jwtClaims{}, func(token *jwt.Token) (interface{}, error) {
 		return []byte("secret"), nil // Replace "secret" with your actual secret key
 	})
@@ -59,39 +59,39 @@ func ValidateToken(tokenString string, userID string) (message string) {
 	if err != nil {
 		if err == jwt.ErrSignatureInvalid {
 			message = "invalid token signature"
-			return message
+			return "",message
 		}
 		message = "invalid token"
-		return message
+		return "",message
 	}
 
 	claims, ok := token.Claims.(*jwtClaims)
 	if !ok || !token.Valid {
 		message = "invalid token claims"
-		return message
+		return "",message
 	}
 
-	if claims.UserID != userID {
-		message = "user ID mismatch"
-		return message
-	}
+	// if claims.UserID != userId {
+	// 	message = "user ID mismatch"
+	// 	return "",message
+	// }
 
-	return message
+	return claims.UserID, message
 }
 
-func CheckToken(token string) error {
+func CheckToken(token string) (err error) {
 	claims := &jwtClaims{}
 	tkn, err := jwt.ParseWithClaims(token, claims, func(token *jwt.Token) (interface{}, error) {
 		return []byte("secret"), nil 
 	})
 	if err != nil {
 		if err == jwt.ErrSignatureInvalid {
-			return echo.ErrUnauthorized
+			return err
 		}
-		return echo.ErrInternalServerError
+		return err
 	}
 	if !tkn.Valid {
-		return echo.ErrUnauthorized
+		return err
 	}
-	return nil
+	return err
 }
