@@ -532,7 +532,6 @@ const docTemplate = `{
         "product.Product": {
             "type": "object",
             "required": [
-                "productDesc",
                 "productName",
                 "productType"
             ],

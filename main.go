@@ -4,9 +4,9 @@ import (
 	"log"
 	"neversitup/logictest"
 	"neversitup/authen"
-	"neversitup/order"
-	"neversitup/product"
-	"neversitup/user"
+	"neversitup/api/order"
+	"neversitup/api/product"
+	"neversitup/api/user"
 	"time"
 
 	"github.com/labstack/echo/v4"

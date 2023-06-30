@@ -45,7 +45,6 @@ definitions:
         maxLength: 50
         type: string
     required:
-    - productDesc
     - productName
     - productType
     type: object

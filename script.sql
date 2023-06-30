@@ -12,7 +12,7 @@ CREATE TABLE users (
 CREATE TABLE products (
 	id VARCHAR (50) PRIMARY key default gen_random_uuid(),
 	product_name VARCHAR (255) NOT NULL,
-	product_desc VARCHAR (1000) NOT NULL,
+	product_desc VARCHAR (1000),
 	product_type VARCHAR (50) NOT NULL,
 	price int NOT NULL,
     created_date TIMESTAMP  NOT NULL
