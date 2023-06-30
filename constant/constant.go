@@ -11,3 +11,8 @@ const (
 const (
 	Inprogress string = "IN_PROGRESS"
 )
+
+const (
+	Created string = "CREATED"
+	Ok 		string = "OK"
+)

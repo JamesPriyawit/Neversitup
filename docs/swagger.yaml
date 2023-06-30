@@ -1,0 +1,398 @@
+definitions:
+  authen.LoginRes:
+    properties:
+      token:
+        type: string
+      userId:
+        type: string
+    type: object
+  logictest.Result:
+    properties:
+      result:
+        type: string
+    type: object
+  order.Order:
+    properties:
+      createdDate:
+        type: string
+      product_id:
+        maxLength: 50
+        type: string
+      productId:
+        type: string
+      status:
+        type: string
+      user_id:
+        type: string
+    required:
+    - product_id
+    type: object
+  product.Product:
+    properties:
+      createdDate:
+        type: string
+      price:
+        type: integer
+      productDesc:
+        maxLength: 1000
+        type: string
+      productId:
+        type: string
+      productName:
+        maxLength: 255
+        type: string
+      productType:
+        maxLength: 50
+        type: string
+    required:
+    - productDesc
+    - productName
+    - productType
+    type: object
+  user.User:
+    properties:
+      createdDate:
+        type: string
+      firstname:
+        maxLength: 50
+        type: string
+      id:
+        type: string
+      lastname:
+        maxLength: 50
+        type: string
+      password:
+        maxLength: 50
+        minLength: 6
+        type: string
+      rePassword:
+        maxLength: 50
+        minLength: 6
+        type: string
+      username:
+        maxLength: 50
+        minLength: 6
+        type: string
+    required:
+    - firstname
+    - lastname
+    - password
+    - rePassword
+    - username
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: support@swagger.io
+    name: API Support
+    url: http://www.swagger.io/support
+  description: This is a sample server server.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: NeversitupTest
+  version: "1.0"
+paths:
+  /api/createOrder:
+    post:
+      consumes:
+      - application/json
+      description: CreateOrder
+      parameters:
+      - description: productId
+        in: formData
+        name: productId
+        required: true
+        type: string
+      - description: Bearer
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: CreateOrder
+      tags:
+      - Order
+  /api/createProduct:
+    post:
+      consumes:
+      - application/json
+      description: CreateProduct
+      parameters:
+      - description: name,desc,type is require
+        in: body
+        name: Product
+        required: true
+        schema:
+          $ref: '#/definitions/product.Product'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: CreateProduct
+      tags:
+      - Product
+  /api/deleteOrder:
+    delete:
+      consumes:
+      - application/json
+      description: DeleteOrder
+      parameters:
+      - description: productId
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: DeleteOrder
+      tags:
+      - Order
+  /api/getOrder:
+    get:
+      consumes:
+      - application/json
+      description: GetOrder
+      parameters:
+      - description: Bearer
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/order.Order'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: GetOrder
+      tags:
+      - Order
+  /api/getProduct:
+    get:
+      consumes:
+      - application/json
+      description: GetProduct
+      parameters:
+      - description: optional
+        in: query
+        name: productId
+        type: string
+      - description: optional
+        in: query
+        name: productType
+        type: string
+      - description: optional
+        in: query
+        name: page
+        type: string
+      - description: optional
+        in: query
+        name: size
+        type: string
+      - description: Bearer
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/product.Product'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: GetProduct
+      tags:
+      - Product
+  /api/getUser:
+    put:
+      consumes:
+      - application/json
+      description: GetUser
+      parameters:
+      - description: userId
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/user.User'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: GetUser
+      tags:
+      - User
+  /api/register:
+    post:
+      consumes:
+      - application/json
+      description: CreateUser
+      parameters:
+      - description: except created every field are require and validate length
+        in: body
+        name: User
+        required: true
+        schema:
+          $ref: '#/definitions/user.User'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: CreateUser
+      tags:
+      - User
+  /login:
+    post:
+      consumes:
+      - application/json
+      description: Login
+      parameters:
+      - description: require
+        in: formData
+        name: username
+        required: true
+        type: string
+      - description: require
+        in: formData
+        name: password
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/authen.LoginRes'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Login
+      tags:
+      - Authen
+  /validatePinCode:
+    get:
+      consumes:
+      - application/json
+      description: logic test - ValidatePinCode
+      parameters:
+      - description: input
+        in: query
+        name: input
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/logictest.Result'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/logictest.Result'
+      summary: ValidatePinCode
+      tags:
+      - logictest
+schemes:
+- http
+swagger: "2.0"

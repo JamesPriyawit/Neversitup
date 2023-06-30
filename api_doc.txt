@@ -1,0 +1,5 @@
+Swagger
+
+run - "swag init" in terminal before run project
+
+http://localhost:8080/swagger/index.html#/

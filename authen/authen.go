@@ -14,27 +14,38 @@ type jwtClaims struct {
 	jwt.StandardClaims
 }
 
-
+// Login godoc
+// @Summary Login
+// @Description Login
+// @Tags Authen
+// @Accept json
+// @Produce json
+// @Param username formData string true "require"
+// @Param password formData string true "require"
+// @Success 200 {object} LoginRes
+// @Failure 400 string string
+// @Failure 500 string string
+// @Router /login [post]
 func Login(c echo.Context) error {
 	user := c.FormValue("username")
 	pass := c.FormValue("password")
 	id, username, password, err := getUserByUsername(user)
 	if err != nil {
-		return echo.NewHTTPError(http.StatusInternalServerError, err.Error())
+		return c.String(http.StatusInternalServerError, err.Error())
 	}
 	if len(username) == 0 {
-		return echo.NewHTTPError(http.StatusUnauthorized, "Invalid username or password")
+		return c.String(http.StatusBadRequest, "Invalid username or password")
 	}
 
 	err = bcrypt.CompareHashAndPassword([]byte(password), []byte(pass))
 	if err != nil {
-		return echo.NewHTTPError(http.StatusUnauthorized, "Invalid username or password")
+		return c.String(http.StatusBadRequest, "Invalid username or password")
 	}
 	token := generateJWT(id)
-	return c.JSON(http.StatusOK, map[string]string{
-		"token": token,
-		"userId": id,
-	})
+	var resp LoginRes
+	resp.Token = token
+	resp.UserId = id
+	return c.JSON(http.StatusOK, resp)
 }
 
 func generateJWT(userID string) string {
