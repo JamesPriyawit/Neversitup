@@ -1,0 +1,451 @@
+{
+	"info": {
+		"_postman_id": "2a297477-71e4-4a6e-ae39-868b22bb66e8",
+		"name": "neversitup-test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17310029"
+	},
+	"item": [
+		{
+			"name": "Order",
+			"item": [
+				{
+					"name": "createOrder",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZjdjM2QyNDctZmQ4Mi00ZmM1LThmMTEtODYxNzIxMzRhZTM4IiwiZXhwIjoxNjg4MTY3ODY5fQ.vPf2O5BXNFiCzB0F4VgvkbDBGzC1N3SK2np8dlT4dwY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "productId",
+									"value": "bf0f9517-160f-450f-9e5d-ce9c368dff7e",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:8080/api/createOrder",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"createOrder"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getOrder",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZjdjM2QyNDctZmQ4Mi00ZmM1LThmMTEtODYxNzIxMzRhZTM4IiwiZXhwIjoxNjg4MTY3ODY5fQ.vPf2O5BXNFiCzB0F4VgvkbDBGzC1N3SK2np8dlT4dwY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/getOrder",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"getOrder"
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "type1",
+									"disabled": true
+								},
+								{
+									"key": "id",
+									"value": "704a97f5-6357-4617-8c5c-5dd068a3067a",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "size",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "orderId",
+									"value": "2595d3ba-c8d6-4510-b7b3-3a7e459e8c5f",
+									"disabled": true
+								},
+								{
+									"key": "status",
+									"value": "IN_PROGRESS",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteOrder",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/deleteOrder/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"deleteOrder",
+								":id"
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "type1",
+									"disabled": true
+								},
+								{
+									"key": "id",
+									"value": "704a97f5-6357-4617-8c5c-5dd068a3067a",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "size",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "userId",
+									"value": "0e8bc253-37a6-46a5-b2a7-bbe51d677ef6",
+									"disabled": true
+								},
+								{
+									"key": "orderId",
+									"value": "2595d3ba-c8d6-4510-b7b3-3a7e459e8c5f",
+									"disabled": true
+								},
+								{
+									"key": "status",
+									"value": "IN_PROGRESS",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2595d3ba-c8d6-4510-b7b3-3a7e459e8c5f"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "getProduct",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZjBhMTIzY2UtN2NiNS00YTcxLWEyM2UtZWQ5YzdiM2M4MGQwIiwiZXhwIjoxNjg4MTY0NzgyfQ.PyZC47WqbuavpX59QIZTo7fv9ORsg310qlTowo56FwA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/getProduct",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"getProduct"
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "type1",
+									"disabled": true
+								},
+								{
+									"key": "id",
+									"value": "704a97f5-6357-4617-8c5c-5dd068a3067a",
+									"disabled": true
+								},
+								{
+									"key": "orderId",
+									"value": "2595d3ba-c8d6-4510-b7b3-3a7e459e8c5f",
+									"disabled": true
+								},
+								{
+									"key": "status",
+									"value": "IN_PROGRESS",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createProduct",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"productName\": \"testProduct1\",\n    \"productDesc\": \"testDesc1\",\n    \"productType\": \"type1\",\n    \"price\": 20\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/createProduct",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"createProduct"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "logicTest",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/logictest?input=887712",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"logictest"
+					],
+					"query": [
+						{
+							"key": "input",
+							"value": "887712"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"testtest7\",\n    \"password\": \"testtest7\",\n    \"rePassword\": \"testtest7\",\n    \"firstname\": \"e\",\n    \"lastname\": \"e\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/register",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getUser",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/getUser/:id",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"getUser",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "f0a123ce-7cb5-4a71-a23e-ed9c7b3c80d0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "username",
+							"value": "testtest5",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "testtest5",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8080/login",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"login"
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": "type1",
+							"disabled": true
+						},
+						{
+							"key": "id",
+							"value": "704a97f5-6357-4617-8c5c-5dd068a3067a",
+							"disabled": true
+						},
+						{
+							"key": "page",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "size",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "userId",
+							"value": "0e8bc253-37a6-46a5-b2a7-bbe51d677ef6",
+							"disabled": true
+						},
+						{
+							"key": "orderId",
+							"value": "2595d3ba-c8d6-4510-b7b3-3a7e459e8c5f",
+							"disabled": true
+						},
+						{
+							"key": "status",
+							"value": "IN_PROGRESS",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
