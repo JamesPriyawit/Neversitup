@@ -6,6 +6,7 @@ import (
 	"sync"
 
 	_ "github.com/lib/pq"
+	config "github.com/spf13/viper"
 )
 
 var lockInitPostgresDBPool sync.Mutex
@@ -29,7 +30,7 @@ func initPostgresPool() *sql.DB {
 			return PostgresPool
 		}
 	}
-	PostgresPool, err = sql.Open("postgres", "port=5432 user=postgres password=password host=localhost dbname=postgres sslmode=disable")
+	PostgresPool, err = sql.Open("postgres", config.GetString("db.postgresDB.connection.string"))
 	if err != nil {
 		log.Println("Can not initial Postgres DB Pool", err.Error())
 	} 

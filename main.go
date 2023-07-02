@@ -2,21 +2,22 @@ package main
 
 import (
 	"log"
-	"neversitup/logictest"
-	"neversitup/authen"
 	"neversitup/api/order"
 	"neversitup/api/product"
 	"neversitup/api/user"
+	"neversitup/authen"
+	"neversitup/logictest"
 	"time"
 
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	"github.com/tylerb/graceful"
 
-	_"neversitup/docs"
+	_ "neversitup/docs"
+
+	config "github.com/spf13/viper"
 	echoSwagger "github.com/swaggo/echo-swagger"
 )
-
 
 // @title NeversitupTest
 // @version 1.0
@@ -31,7 +32,7 @@ import (
 // @license.url http://www.apache.org/licenses/LICENSE-2.0.html
 
 // @host localhost:8080
-// @BasePath 
+// @BasePath
 // @schemes http
 func main() {
 	log.Println("API start running")
@@ -45,7 +46,7 @@ func main() {
 
 	e.POST("/login", authen.Login)
 
-	r := e.Group("/api")
+	r := e.Group(config.GetString("service.endpoint"))
 	r.POST("/register", user.CreateUser)
 	r.PUT("/getUser/:id", user.GetUser)
 
@@ -56,7 +57,14 @@ func main() {
 	r.GET("/getOrder", order.GetOrder)
 	r.DELETE("/deleteOrder/:id", order.DeleteOrder)
 
-	e.Server.Addr = ":8080"
+	e.Server.Addr = ":" + config.GetString("service.port")
 	graceful.ListenAndServe(e.Server, 5*time.Second)
+}
+
+func init () {
+	config.SetConfigFile("config/dev.yml")
+	if err := config.ReadInConfig(); err != nil {
+		log.Fatal("Fatal error env config (file)")
+	}
 }
 
