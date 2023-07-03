@@ -195,6 +195,30 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "type": "string",
+                        "description": "optional",
+                        "name": "orderId",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "optional",
+                        "name": "status",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "optional",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "optional",
+                        "name": "size",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
                         "description": "Bearer",
                         "name": "Authorization",
                         "in": "header",
@@ -507,24 +531,23 @@ const docTemplate = `{
         },
         "order.Order": {
             "type": "object",
-            "required": [
-                "product_id"
-            ],
             "properties": {
                 "createdDate": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "productDesc": {
                     "type": "string"
                 },
                 "productId": {
                     "type": "string"
                 },
-                "product_id": {
-                    "type": "string",
-                    "maxLength": 50
-                },
-                "status": {
+                "productName": {
                     "type": "string"
                 },
-                "user_id": {
+                "status": {
                     "type": "string"
                 }
             }

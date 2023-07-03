@@ -36,6 +36,9 @@ func getOrderById(orderId, userId, status string, page, size int) (orders []Orde
 		var o Order
 		rows.Scan(
 			&o.Id,
+			&o.ProductId,
+			&o.ProductName,
+			&o.ProductDesc,
 			&o.Status,
 			&o.CreatedDate,
 		)
@@ -46,7 +49,7 @@ func getOrderById(orderId, userId, status string, page, size int) (orders []Orde
 
 func prepareSQLGetOrderById(orderId, userId, status string, page, size int) (result string, bindValue []interface{}) {
 	var buffer bytes.Buffer
-	buffer.WriteString("SELECT id, status, created_date FROM orders WHERE 1=1 ")
+	buffer.WriteString("SELECT o.id, o.product_id, p.product_name, p.product_desc, o.status, o.created_date FROM orders o join products p on p.id = o.product_id WHERE 1=1 ")
 	if len(userId) > 0 {
 		buffer.WriteString("AND user_id = $1 ")
 		bindValue = append(bindValue, userId)

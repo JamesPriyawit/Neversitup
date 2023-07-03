@@ -1,13 +1,14 @@
 package order
 
-import(
+import (
 	"time"
 )
 
 type Order struct {
-	Id				string `json:"productId"`
-	UserId    string `json:"user_id"`
-	ProductId    string `json:"product_id" validate:"required,max=50"`
-	Status		string `json:"status"`
-	CreatedDate    time.Time  `json:"createdDate"`
+	Id          string    `json:"id"`
+	ProductId   string    `json:"productId"`
+	ProductName string    `json:"productName`
+	ProductDesc string    `json:"productDesc`
+	Status      string    `json:"status"`
+	CreatedDate time.Time `json:"createdDate"`
 }

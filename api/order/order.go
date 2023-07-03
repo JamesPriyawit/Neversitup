@@ -58,6 +58,10 @@ func CreateOrder(c echo.Context) error {
 // @Accept json
 // @Produce json
 // @Success 200 {object} Order
+// @Param orderId query string false "optional"
+// @Param status query string false "optional"
+// @Param page query string false "optional"
+// @Param size query string false "optional"
 // @Failure 400 string string
 // @Failure 401 string string
 // @Failure 500 string string

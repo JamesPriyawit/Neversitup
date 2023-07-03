@@ -15,17 +15,16 @@ definitions:
     properties:
       createdDate:
         type: string
-      product_id:
-        maxLength: 50
+      id:
+        type: string
+      productDesc:
         type: string
       productId:
         type: string
+      productName:
+        type: string
       status:
         type: string
-      user_id:
-        type: string
-    required:
-    - product_id
     type: object
   product.Product:
     properties:
@@ -196,6 +195,22 @@ paths:
       - application/json
       description: GetOrder
       parameters:
+      - description: optional
+        in: query
+        name: orderId
+        type: string
+      - description: optional
+        in: query
+        name: status
+        type: string
+      - description: optional
+        in: query
+        name: page
+        type: string
+      - description: optional
+        in: query
+        name: size
+        type: string
       - description: Bearer
         in: header
         name: Authorization
