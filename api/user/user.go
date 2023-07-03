@@ -4,9 +4,10 @@ import (
 	"net/http"
 	"neversitup/constant"
 	"neversitup/common"
-
+	"strings"
 	"github.com/labstack/echo/v4"
 	"golang.org/x/crypto/bcrypt"
+	"neversitup/authen"
 )
 
 // CreateUser godoc
@@ -61,19 +62,23 @@ func CreateUser(c echo.Context) error {
 // @Tags User
 // @Accept json
 // @Produce json
-// @Param id path string true "userId"
 // @Success 200 {object} User
 // @Failure 400 string string
 // @Failure 500 string string
-// @Router /api/getUser [put]
+// @Router /api/getUser [get]
+// @Security ApiKeyAuth
+// @securityDefinitions.basic BasicAuth
+// @Param Authorization header string true "Bearer"
 func GetUser(c echo.Context) error {
-	userId := c.Param("id")
+	token := c.Request().Header.Get("Authorization")
+	token = strings.TrimPrefix(token, "Bearer ")
+	userId, errMsg := authen.ValidateToken(token)
+	if len(errMsg) > 0 {
+		return c.String(http.StatusUnauthorized, errMsg)
+	}
 	userInfo, err := getUserById(userId)
 	if err != nil {
 		return c.String(http.StatusInternalServerError, err.Error())
-	}
-	if len(userInfo.Username) == 0 {
-		return c.String(http.StatusBadRequest, "user not found.")
 	}
 	return c.JSON(http.StatusOK, userInfo)
 }

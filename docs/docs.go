@@ -229,7 +229,10 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/order.Order"
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/order.Order"
+                            }
                         }
                     },
                     "400": {
@@ -330,7 +333,12 @@ const docTemplate = `{
             }
         },
         "/api/getUser": {
-            "put": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "GetUser",
                 "consumes": [
                     "application/json"
@@ -345,9 +353,9 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "userId",
-                        "name": "id",
-                        "in": "path",
+                        "description": "Bearer",
+                        "name": "Authorization",
+                        "in": "header",
                         "required": true
                     }
                 ],

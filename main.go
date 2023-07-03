@@ -48,7 +48,7 @@ func main() {
 
 	r := e.Group(config.GetString("service.endpoint"))
 	r.POST("/register", user.CreateUser)
-	r.PUT("/getUser/:id", user.GetUser)
+	r.GET("/getUser", user.GetUser)
 
 	r.POST("/createProduct", product.CreateProduct)
 	r.GET("/getProduct", product.GetProduct)

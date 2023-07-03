@@ -222,7 +222,9 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/order.Order'
+            items:
+              $ref: '#/definitions/order.Order'
+            type: array
         "400":
           description: Bad Request
           schema:
@@ -290,14 +292,14 @@ paths:
       tags:
       - Product
   /api/getUser:
-    put:
+    get:
       consumes:
       - application/json
       description: GetUser
       parameters:
-      - description: userId
-        in: path
-        name: id
+      - description: Bearer
+        in: header
+        name: Authorization
         required: true
         type: string
       produces:
@@ -315,6 +317,8 @@ paths:
           description: Internal Server Error
           schema:
             type: string
+      security:
+      - ApiKeyAuth: []
       summary: GetUser
       tags:
       - User

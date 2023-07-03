@@ -224,7 +224,10 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/order.Order"
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/order.Order"
+                            }
                         }
                     },
                     "400": {
@@ -325,7 +328,12 @@
             }
         },
         "/api/getUser": {
-            "put": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "GetUser",
                 "consumes": [
                     "application/json"
@@ -340,9 +348,9 @@
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "userId",
-                        "name": "id",
-                        "in": "path",
+                        "description": "Bearer",
+                        "name": "Authorization",
+                        "in": "header",
                         "required": true
                     }
                 ],

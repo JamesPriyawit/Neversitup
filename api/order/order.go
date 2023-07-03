@@ -57,7 +57,7 @@ func CreateOrder(c echo.Context) error {
 // @Tags Order
 // @Accept json
 // @Produce json
-// @Success 200 {object} Order
+// @Success 200 {object} []Order
 // @Param orderId query string false "optional"
 // @Param status query string false "optional"
 // @Param page query string false "optional"

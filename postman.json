@@ -344,8 +344,21 @@
 		},
 		{
 			"name": "getUser",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
-				"method": "PUT",
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZjdjM2QyNDctZmQ4Mi00ZmM1LThmMTEtODYxNzIxMzRhZTM4IiwiZXhwIjoxNjg4NDQ5NzQ5fQ.t48PDj76pUjcEPUvbJOnw-5RQWMdig1h3lqu7KKM1yk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
 				"header": [],
 				"body": {
 					"mode": "raw",
@@ -357,21 +370,14 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/api/getUser/:id",
+					"raw": "localhost:8080/api/getUser",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
 						"api",
-						"getUser",
-						":id"
-					],
-					"variable": [
-						{
-							"key": "id",
-							"value": "f0a123ce-7cb5-4a71-a23e-ed9c7b3c80d0"
-						}
+						"getUser"
 					]
 				}
 			},
